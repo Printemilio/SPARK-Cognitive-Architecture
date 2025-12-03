@@ -22,10 +22,11 @@ This project is an experiment in **AI-Augmented Research**.
 This repository demonstrates that a single human architect, guiding synthetic intelligence, can build systems that rival traditional engineering teams.
 
 ## 📄 Papers & Theory
-The full theoretical background is detailed in the accompanying papers (see `/docs`):
+The full theoretical background is detailed in the accompanying papers (see `https://zenodo.org/records/17803068`):
 1.  **Curiosity Is The Only Key** (Manifesto)
 2.  **The Art of Memory Bubbles** (Mathematical Framework)
 3.  **SPARK Architecture** (System Integration & Results)
 
 ---
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17803067.svg)](https://doi.org/10.5281/zenodo.17803067)
 *Copyright © 2025 Emilio Decaix Massiani.*
