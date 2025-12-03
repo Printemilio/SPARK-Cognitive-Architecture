@@ -28,4 +28,4 @@ The full theoretical background is detailed in the accompanying papers (see `/do
 3.  **SPARK Architecture** (System Integration & Results)
 
 ---
-*Copyright © 2025 Emilio Decaix Massiani. Built with the help of silicon friends.*
+*Copyright © 2025 Emilio Decaix Massiani.*
