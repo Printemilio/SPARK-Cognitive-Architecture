@@ -1,3 +1,27 @@
+/*
+ * ======================================================================================
+ * SPARK AI CORE - Synaptic Plasticity & Adaptive Reinforcement Knowledge
+ * ======================================================================================
+ *
+ * Copyright (c) 2025 Emilio Decaix Massiani
+ *
+ * Licensed under the MIT License. See LICENSE file in the project root for full terms.
+ *
+ * --------------------------------------------------------------------------------------
+ * DEVELOPMENT METHODOLOGY DISCLOSURE:
+ * This software represents an experiment in AI-Augmented Research.
+ *
+ * - CONCEPT & ARCHITECTURE: Conceived and designed by Emilio Decaix Massiani.
+ * - IMPLEMENTATION: The C kernels were generated, refined, and optimized through
+ * an iterative process using LLM-based agents under strict human supervision.
+ *
+ * The intellectual property of the architectural logic and theoretical framework
+ * remains the sole work of the author.
+ * --------------------------------------------------------------------------------------
+ */
+
+
+
 // Spark_Core/spark_bridge.c
 // Sensory bridge acting as a thalamus for SPARK. It scales retinal density
 // from available cognitive capacity and injects V1-like feature vectors.
