@@ -20,13 +20,13 @@
  * --------------------------------------------------------------------------------------
  */
 
-// Spark_Core/spark18.h
-#ifndef SPARK18_H
-#define SPARK18_H
+// Spark_Core/spark19.h
+#ifndef SPARK19_H
+#define SPARK19_H
 
 #include <stddef.h>
 
-#include "cg18.h"
+#include "cg19.h"
 #include "qb16.h"
 #include "spark_config.h"
 
@@ -40,17 +40,32 @@ typedef struct {
 } Bubble;
 
 typedef struct {
+    int index;
+    int left;
+    int right;
+    int axis;
+    double bbox_min[3];
+    double bbox_max[3];
+} KDNode;
+
+typedef struct {
     size_t d;
     double U[2][64]; // max projection size support up to 64 dims by default
     Bubble *bubbles;
     size_t count;
     size_t capacity;
+    KDNode *kd_nodes;
+    size_t kd_count;
+    int kd_root;
+    int kd_dirty;
     double r0;
     double match_tau;
     double dir_tau;
     double emotion_gain;
     double split_emotion;
     size_t max_bubbles;
+    double *scratch_v;
+    size_t scratch_dim;
     long stores;
     long recalls;
 } BubbleShadowMemory;
@@ -74,6 +89,9 @@ typedef struct {
     size_t novelty_len;
     size_t novelty_cap;
     double threshold_min;
+    double *scratch_xn;
+    double *scratch_mean_sim;
+    size_t scratch_mean_cap;
 } CuriosityModule;
 
 typedef struct {
@@ -87,6 +105,8 @@ typedef struct {
     double threshold;
     int neighborhood;
     double *memory_buffer;
+    double *tmp_xn;   // workspace: normalized input
+    double *tmp_pred; // workspace: prediction buffer
     size_t memory_len;
     double *recent_activations;
     size_t recent_len;
@@ -107,6 +127,7 @@ typedef struct {
     double decay_tau;
     double min_similarity;
     size_t dim;
+    MemoryShim *global_memory;
     double *stim_buffer;   // flattened stimuli history (buf_len x dim)
     size_t *stim_time;     // timestamps for stimuli
     size_t stim_len;
@@ -119,6 +140,9 @@ typedef struct {
     double reward_decay;
     double pending_reward;
     QuantumSignalInterface *q;
+    double *scratch_xn;
+    double *scratch_weights;
+    size_t scratch_weights_cap;
 } AffectModule;
 
 typedef struct {
@@ -184,4 +208,4 @@ size_t spark_graph_state_dim(const SparkSystem *sys);
 void spark_graph_snapshot(const SparkSystem *sys, double *out_matrix); // out size num_nodes*state_dim
 void spark_global_memory_stats(const SparkSystem *sys, long *stores, long *recalls, size_t *count);
 
-#endif // SPARK18_H
+#endif // SPARK19_H
