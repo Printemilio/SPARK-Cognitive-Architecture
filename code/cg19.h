@@ -20,9 +20,9 @@
  * --------------------------------------------------------------------------------------
  */
 
-// Spark_Core/cg18.h
-#ifndef CG18_H
-#define CG18_H
+// Spark_Core/cg19.h
+#ifndef CG19_H
+#define CG19_H
 
 #include <stddef.h>
 
@@ -89,6 +89,8 @@ struct Node {
     double energy;
     int sleeping;
     int inactivity_streak;
+    int hnsw_level;
+    SynapseList *hnsw_links; // per-level neighbor links for HNSW routing
 };
 
 typedef struct {
@@ -101,6 +103,8 @@ typedef struct {
 struct CognitiveGraph {
     Node *nodes;
     size_t num_nodes;
+    size_t max_nodes;
+    size_t capacity;
     size_t state_dim;
     size_t num_segments;
     double segment_threshold;
@@ -110,17 +114,34 @@ struct CognitiveGraph {
     double segment_activation_ratio;
     double global_chem;
     ModulatorTable modulators;
+    size_t *active_current;
+    size_t active_current_len;
+    size_t *active_next;
+    size_t active_next_len;
+    char *scheduled;
+    size_t *touched_nodes;
+    size_t touched_len;
+    char *touched_flag;
+    Node **nbr_nodes;
+    double *nbr_weights;
+    size_t nbr_cap;
+    // HNSW index
+    int hnsw_entry;
+    int hnsw_last;
+    int hnsw_max_level;
+    int hnsw_M;
 };
 
 // Allocation helpers
 CognitiveGraph *cg_create(size_t num_nodes, size_t state_dim, double activation_threshold, int sleep_patience, size_t num_segments, double segment_threshold, double segment_activation_ratio);
 void cg_free(CognitiveGraph *g);
+void cg_reserve(CognitiveGraph *g, size_t need);
 
 // Topology
 void cg_connect(CognitiveGraph *g, size_t src, size_t dst, double weight);
 
 // State I/O
-void cg_inject(CognitiveGraph *g, size_t idx, const double *pattern);
+void cg_inject(CognitiveGraph *g, const double *pattern);
 void cg_snapshot_states(const CognitiveGraph *g, double *out_matrix); // out_matrix size = num_nodes * state_dim
 
 // Modulators
@@ -141,4 +162,4 @@ void cg_curiosity_rule(Node *node, Node **neighbors, double *weights, size_t nei
 void cg_affect_rule(Node *node, Node **neighbors, double *weights, size_t neighbor_count, CognitiveGraph *graph);
 void cg_plasticity_rule(Node *node, Node **neighbors, double *weights, size_t neighbor_count, CognitiveGraph *graph);
 
-#endif // CG18_H
+#endif // CG19_H
